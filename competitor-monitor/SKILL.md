@@ -51,21 +51,30 @@ Tiered — use the best available. None of the lower tiers are fallbacks for lac
 - Reddit JSON endpoints (see below) via WebFetch — no auth, clean structured data **(often blocked in hosted environments — see Apify path below)**
 - Wayback Machine via `http://web.archive.org/web/*/<url>` — historical pricing + feature pages
 
-### Tier 2a (preferred for Reddit): Apify reddit-scraper-lite
+### Tier 2a (preferred for Reddit): Apify scrapers
 
-Reddit is frequently blocked by browser and WebFetch safety policies. When this happens, use the **Apify reddit-scraper-lite actor** via the bundled helper script:
+Reddit is frequently blocked by browser and WebFetch safety policies. When this happens, use one of two bundled Apify actors via the helper scripts:
 
+**Default — `trudax/reddit-scraper-lite`**:
 ```bash
 scripts/reddit_via_apify.sh <competitor> [time_range] [max_items]
 # e.g.
 scripts/reddit_via_apify.sh "ParentSquare" month 50
 ```
+Cheap, fast, sufficient for most battlecards.
 
-The script reads the Apify token from `$APIFY_TOKEN` (env var) or `~/.apify_token` (chmod 600 file), in that order. **Never hardcode the token in skill files or battlecards.** See `references/reddit-playbook.md` for setup, the actor's input schema, and parsing guidance.
+**Deep mode — `trudax/reddit-scraper` (full, actor ID `FgJtjDwJCLhRH9saM`)**:
+```bash
+scripts/reddit_via_apify_deep.sh <competitor> [time_range] [max_items] [community]
+# examples
+scripts/reddit_via_apify_deep.sh "ParentSquare" year 50 k12sysadmin
+SEARCH_COMMENTS=true scripts/reddit_via_apify_deep.sh "ParentSquare" month 100
+```
+Use when you need comment-body search, subreddit-scoped search, date cutoffs, or large-volume pulls. Costs more CUs — default to lite, escalate to deep only when lite returns thin or `depth: "deep"` is passed.
 
-Actor: `trudax/reddit-scraper-lite` (public, free-tier-friendly for small runs).
+Both scripts read the Apify token from `$APIFY_TOKEN` (env var) or `~/.apify_token` (chmod 600 file), in that order. **Never hardcode the token in skill files or battlecards.** See `references/reddit-playbook.md` for setup, input schemas, parsing guidance, and token security.
 
-Output: JSON array of posts with title, subreddit, author, body, comments, score, timestamp.
+Output (both actors): JSON array of posts with title, communityName, author, body, comments, upVotes, numberOfComments, createdAt.
 
 ### Tier 3: Discovery
 

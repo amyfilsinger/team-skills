@@ -21,9 +21,11 @@ Reddit is systematically under-indexed by web search engines. The competitive in
 
 In many hosted environments, `reddit.com` is blocked by browser safety policies and WebFetch. Try in this order:
 
-### Tier 1 — Apify `trudax/reddit-scraper-lite` (preferred)
+### Tier 1a — Apify `trudax/reddit-scraper-lite` (default)
 
 Bundled helper: `scripts/reddit_via_apify.sh <competitor> [time_range] [max_items]`
+
+Use this for standard battlecard runs. It's cheaper, faster, and sufficient 80% of the time.
 
 **Setup (one-time)**:
 ```bash
@@ -68,6 +70,43 @@ for p in sorted(posts, key=lambda x: x.get('numberOfComments', 0), reverse=True)
 - `comments`: array of `{author, body, upVotes, createdAt}` (populated unless `skipComments: true`)
 
 **Cost**: Apify's free tier covers small runs. Each run consumes actor compute units — check your plan at console.apify.com. For a 50-post pull with 10 comments each, expect ~0.01–0.05 CUs.
+
+### Tier 1b — Apify `trudax/reddit-scraper` (full, for depth: "deep")
+
+Bundled helper: `scripts/reddit_via_apify_deep.sh <competitor> [time_range] [max_items] [community]`
+
+Actor ID: `FgJtjDwJCLhRH9saM` — the full version of the scraper. Reach for this when:
+
+- You need to **search comment bodies**, not just post titles/bodies (`SEARCH_COMMENTS=true` env var)
+- You need to **scope to a specific subreddit** (pass community name as 4th arg — e.g. `"k12sysadmin"`)
+- You want **date cutoffs** finer than Reddit's built-in time filter (edit the script to pass `postDateLimit` / `commentDateLimit`)
+- You're doing a large volume pull (full actor allows 3-hour timeout, 2GB memory)
+- The lite version returned thin results and you suspect the signal is in comments
+
+**Usage examples**:
+```bash
+# Scope to r/k12sysadmin specifically
+scripts/reddit_via_apify_deep.sh "ParentSquare" year 50 k12sysadmin
+
+# Search comment bodies (catches cases where the competitor is named in discussion, not titles)
+SEARCH_COMMENTS=true scripts/reddit_via_apify_deep.sh "ParentSquare" month 100
+
+# Fast mode — posts only, skip comment-tree fetch
+SKIP_COMMENT_FETCH=true scripts/reddit_via_apify_deep.sh "ParentSquare" month 200
+```
+
+**Input schema knobs** (edit the script if you need more control):
+- `searchPosts`, `searchComments`, `searchCommunities`, `searchUsers` — which content types to search
+- `searchCommunityName` — scope to a single subreddit
+- `postDateLimit`, `commentDateLimit` — date cutoffs (ISO strings)
+- `skipComments`, `skipUserPosts`, `skipCommunity` — skip heavy content types for speed
+- `includeNSFW` — default false; keep that way unless needed
+- `maxItems`, `maxPostCount`, `maxComments`, `maxCommunitiesCount`, `maxUserCount` — volume caps
+- `scrollTimeout` — how long to scroll each infinite-scroll page
+
+**Response shape**: same as the lite actor — array of post/comment objects. Posts have `title`, `body`, `communityName`, `author`, `upVotes`, `numberOfComments`, `createdAt`, `url`, `permalink`, and a `comments` array when comment-fetch is enabled.
+
+**Cost**: higher than lite — plan for ~0.05–0.20 CUs per run depending on depth/volume. If your Apify plan is limited, default to the lite script and only escalate to deep when needed.
 
 ### Tier 2 — Reddit JSON endpoints (no auth)
 
