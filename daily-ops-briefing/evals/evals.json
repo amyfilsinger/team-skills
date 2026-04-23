@@ -1,0 +1,85 @@
+{
+  "skill_name": "daily-ops-briefing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run the weekly ops briefing for the district team. It's Thursday April 24th.",
+      "expected_output": "A formatted Slack-style summary message with all 6 sections (Ops Updates, Process Changes, Learnings, Resources & FYIs, Pre-work, Product Launches), populated from the 9 target channels, filtered to messages @mentioning the three target groups. Should show the draft in the conversation and ask before posting.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "all-six-sections-present",
+          "description": "Output contains all 6 category sections: Ops Updates, Process Changes, Learnings, Resources, Pre-work, Product Launches"
+        },
+        {
+          "name": "header-includes-weekly-briefing",
+          "description": "Output header includes 'Weekly Ops Briefing' and a date/week reference"
+        },
+        {
+          "name": "target-groups-referenced",
+          "description": "Output mentions the three target groups: district-onboarding-managers, district-partnerships-managers, technical-implementation"
+        },
+        {
+          "name": "source-channels-listed",
+          "description": "Output references the source Slack channels (at least 5 of the 9 target channels mentioned)"
+        },
+        {
+          "name": "empty-sections-handled",
+          "description": "Any section with no items says 'Nothing this week' or equivalent placeholder — not blank or omitted"
+        },
+        {
+          "name": "no-auto-post",
+          "description": "Output does NOT confirm a message was sent/posted to Slack — it should be a draft for review"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Hey can you compile the weekly district summary? I need to know what came through in #districts, #districts-ops, and the other ops channels this week for the district onboarding and partnerships managers and technical implementation team.",
+      "expected_output": "A correctly formatted weekly briefing that reads all 9 channels, filters for the target @groups, categorizes results into the 6 buckets, and presents a draft for review without auto-posting.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "all-six-sections-present",
+          "description": "Output contains all 6 category sections: Ops Updates, Process Changes, Learnings, Resources, Pre-work, Product Launches"
+        },
+        {
+          "name": "header-includes-weekly-briefing",
+          "description": "Output header includes 'Weekly Ops Briefing' or equivalent title and a date/week reference"
+        },
+        {
+          "name": "target-groups-referenced",
+          "description": "Output mentions the three target groups: district-onboarding-managers, district-partnerships-managers, technical-implementation"
+        },
+        {
+          "name": "no-auto-post",
+          "description": "Output does NOT confirm a message was sent/posted to Slack — it should be a draft for review"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "generate ops briefing for last week (April 14-18) and post it to my slack DMs",
+      "expected_output": "Briefing covering April 14-18 with all 6 sections, and since 'post' was requested, should confirm destination (user's own DM) before sending rather than auto-posting to a team channel.",
+      "files": [],
+      "assertions": [
+        {
+          "name": "all-six-sections-present",
+          "description": "Output contains all 6 category sections: Ops Updates, Process Changes, Learnings, Resources, Pre-work, Product Launches"
+        },
+        {
+          "name": "correct-date-range",
+          "description": "Output references the April 14-18 date range (not current week)"
+        },
+        {
+          "name": "post-confirmation-behavior",
+          "description": "Output confirms DM destination or acknowledges the post request — does NOT silently post without telling the user"
+        },
+        {
+          "name": "does-not-post-to-team-channel",
+          "description": "There is no evidence the message was posted to a public/team channel — post target is user's own DM only"
+        }
+      ]
+    }
+  ]
+}
