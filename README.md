@@ -10,6 +10,7 @@ Shared Claude Code skills for the ClassDojo team. Install any skill by dropping 
 | [`what-did-i-forget`](what-did-i-forget/) | Surface forgotten context and tasks |
 | [`skill-creator`](skill-creator/) | Create new Claude skills |
 | [`qbr-monitoring`](qbr-monitoring/) | Monitor QBR metrics |
+| [`slack-debrief`](slack-debrief/) | Scan Slack channels, rank top threads by reply count, produce paste-ready mrkdwn digest |
 
 ## How to Use a Skill
 
