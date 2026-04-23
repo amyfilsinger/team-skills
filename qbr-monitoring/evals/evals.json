@@ -1,0 +1,43 @@
+{
+  "skill_name": "qbr-monitoring",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "How many impact reviews has the DPM team completed this quarter? Show me progress vs our goal.",
+      "expected_output": "A markdown table showing impact review counts for each of the 5 DPMs (Sophie Kronk, Andrew Menegat, Dillon Jack, Jackson Shaad, Ashley Green), a team total, and that total expressed as a percentage of 138. Includes a pace assessment sentence.",
+      "files": [],
+      "assertions": [
+        "Output contains a markdown table with all 5 DPMs listed by name",
+        "Output shows a TOTAL row with count against 138",
+        "Output includes a pace line (ahead/on pace/behind)",
+        "Output correctly identifies only external meetings with 'impact' in the title",
+        "Output notes any calendars where access was unavailable rather than silently omitting them"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Show me Sophie and Dillon's impact review counts this quarter — how are they individually tracking vs target?",
+      "expected_output": "Counts for Sophie Kronk and Dillon Jack specifically, each compared to the individual target of ~28, with a note about the team context.",
+      "files": [],
+      "assertions": [
+        "Output includes Sophie Kronk's count with individual % vs ~28 target",
+        "Output includes Dillon Jack's count with individual % vs ~28 target",
+        "Output does not include counts for Andrew, Jackson, or Ashley (or clearly separates them)",
+        "Correctly filters to external meetings only"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Are we on pace to hit 138 impact reviews by end of Q2? Give me the full team breakdown.",
+      "expected_output": "Full team table + pace calculation showing whether the team is ahead, on pace, or behind relative to the Q2 timeline. Pace calculation uses days elapsed since Apr 1 divided by total Q2 days × 138.",
+      "files": [],
+      "assertions": [
+        "Output includes a pace calculation showing expected vs actual number",
+        "Output contains all 5 DPMs in a table",
+        "Pace assessment uses the correct formula (days elapsed / total Q2 days × 138)",
+        "Total is expressed as X of 138 (e.g., '34 of 138')",
+        "Output includes the date range scanned"
+      ]
+    }
+  ]
+}
