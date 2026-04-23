@@ -100,6 +100,19 @@ it — don't force it in. Quality over completeness.
 
 ## Step 3 — Format the briefing
 
+Within each category, group bullets by which audience the update applies to. This lets each
+recipient skim straight to what's relevant to them without parsing every bullet.
+
+**Determining the audience for each bullet:**
+Look at *who was @mentioned* in the original Slack message. If a message tagged only
+`@district-onboarding-managers`, the bullet goes under the OM group for that section. If
+multiple groups were tagged, list the bullet under each applicable group (don't duplicate
+the whole text — use a short pointer like `(also relevant to @district-partnerships-managers)`
+on one of them, or put it under the group it's most directly actionable for).
+
+If a group has no items in a given section, skip that sub-header entirely — don't write
+empty sub-groups.
+
 Use this exact template:
 
 ```
@@ -112,48 +125,64 @@ _Sources: #districts #districts-ops #districts-private #cs-whole-team #sales-suc
 *⚙️ Ops Updates*
 _(Updates to SFDC, Asana, or operational tooling)_
 
-• [Summary of update] — [link or channel reference if available]
+*→ @district-onboarding-managers*
+• [Summary of update] — [link or channel reference]
 • ...
+
+*→ @district-partnerships-managers*
+• [Summary] — [source]
+
+*→ @technical-implementation*
+• [Summary] — [source]
 
 ---
 
 *🔄 Process Changes*
 _(Changes in who does what or when)_
 
+*→ @district-onboarding-managers*
 • [Summary] — [source]
-• ...
+
+*→ @technical-implementation*
+• [Summary] — [source]
 
 ---
 
 *💡 Learnings*
 _(Aha's, field insights, lessons from the team)_
 
+*→ @district-onboarding-managers*
 • [Summary] — [source]
-• ...
+
+*→ @district-partnerships-managers*
+• [Summary] — [source]
 
 ---
 
 *📎 Resources & FYIs*
 _(New docs, templates, need-to-know info)_
 
+*→ @district-onboarding-managers*
 • [Summary] — [link if available]
-• ...
+
+*→ @technical-implementation*
+• [Summary] — [source]
 
 ---
 
 *📚 Pre-work*
 _(Upcoming required reading or prep)_
 
+*→ @district-partnerships-managers*
 • [Summary — include deadline or event it's tied to] — [source]
-• ...
 
 ---
 
 *🚀 Product Launches*
 _(New features, releases, product changes)_
 
+*→ @technical-implementation*
 • [Summary] — [source]
-• ...
 
 ---
 _Generated [today's date] | [N] items across [N] channels_
@@ -162,7 +191,9 @@ _Generated [today's date] | [N] items across [N] channels_
 **Formatting rules:**
 - Each bullet should be 1–2 sentences max — scannable, not exhaustive
 - If a thread has more detail, add `(see thread in #channel-name)` at the end of the bullet
-- If a section has nothing to report, write `_Nothing this week_` rather than omitting it
+- Sub-group headers (`*→ @group-name*`) only appear when that group has bullets in the section — skip empty sub-groups entirely
+- If an entire section has nothing to report, write `_Nothing this week_` under the category header rather than omitting the section
+- If an update applies to multiple groups, put it under the group it's most actionable for and append a short note like `(also relevant to @other-group)`
 - Keep the whole briefing tight — this is a digest, not a transcript
 - Use Slack markdown (asterisks for bold, underscores for italics, backticks for code)
 
