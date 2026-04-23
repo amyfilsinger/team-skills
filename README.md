@@ -10,6 +10,7 @@ Shared Claude Code skills for the ClassDojo team. Install any skill by dropping 
 | [`what-did-i-forget`](what-did-i-forget/) | Surface forgotten context and tasks |
 | [`skill-creator`](skill-creator/) | Create new Claude skills |
 | [`qbr-monitoring`](qbr-monitoring/) | Monitor QBR metrics |
+| [`daily-ops-briefing`](daily-ops-briefing/) | Weekly Slack digest for district-onboarding-managers, district-partnerships-managers, and technical-implementation — categorized into Ops Updates, Process Changes, Learnings, Resources/FYIs, Pre-work, and Product Launches |
 
 ## How to Use a Skill
 
