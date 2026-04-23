@@ -98,6 +98,14 @@ existing product behavior. Includes both launches and notable edits to live prod
 If a message genuinely doesn't fit any category (e.g., it's just social/celebratory), skip
 it — don't force it in. Quality over completeness.
 
+### Err on the side of inclusion for substantive updates
+
+When deciding whether a given @mention is worth including, default to including it as long
+as it's substantive (an announcement, decision, resource, launch, change, or field insight).
+The risk is dropping a useful item that someone needed to see — not cluttering a section with
+one extra bullet. Only skip messages that are purely social, duplicative replies that add no
+new information, or reactions/emoji responses.
+
 ## Step 3 — Format the briefing
 
 Within each category, group bullets by which audience the update applies to. This lets each
