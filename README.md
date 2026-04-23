@@ -10,6 +10,7 @@ Shared Claude Code skills for the ClassDojo team. Install any skill by dropping 
 | [`what-did-i-forget`](what-did-i-forget/) | Surface forgotten context and tasks |
 | [`skill-creator`](skill-creator/) | Create new Claude skills |
 | [`qbr-monitoring`](qbr-monitoring/) | Monitor QBR metrics |
+| [`competitor-monitor`](competitor-monitor/) | Comprehensive competitor battlecards: web, Reddit (via Apify), reviews, exec changes, pricing, customer movement |
 
 ## How to Use a Skill
 
